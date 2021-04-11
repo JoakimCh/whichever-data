@@ -46,7 +46,7 @@ import {
   dataToArrayBuffer,
   dataToTypedArray,
   dataToDataView
-} from '/node_modules/bit-consumer/source/bitConsumer.js'
+} from '/node_modules/whichever-data/source/whicheverData.js'
 ```
 
 Cumbersome? Consider using [import maps](https://github.com/WICG/import-maps#readme) also see the [Deno specific doc.](https://deno.land/manual/linking_to_external_code/import_maps)
