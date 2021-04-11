@@ -4,7 +4,8 @@ import {fileURLToPath} from 'url'
 import {dirname, sep as pathSep} from 'path'
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url))+pathSep
-const stopOnError = false, numErrors = 0
+const stopOnError = false
+let numErrors = 0
 
 const dirents = fs.readdirSync(scriptDirectory, {withFileTypes: true})
 for (const dirent of dirents) {
@@ -30,7 +31,7 @@ for (const dirent of dirents) {
 
 if (numErrors) {
   process.exitCode = 1
-  process.stderr.write('\nThere were '+numErrors+' failed tests!\n')
+  process.stderr.write('\nThere were '+numErrors+' failed tests! I hope you don\'t have any plans for today...\n')
 } else {
-  process.stdout.write('\nNo errors found!\n')
+  process.stdout.write('\nNo errors found! Take the rest of the day off?\n')
 }
