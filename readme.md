@@ -25,7 +25,7 @@ function giveMeAnyData(data) {
 #### Install using [NPM](https://www.npmjs.com/)
 
 ```shell
-npm i bit-consumer
+npm i whichever-data
 ```
 
 #### Import the ES module into Node.js
