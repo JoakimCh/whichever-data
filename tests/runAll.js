@@ -14,7 +14,6 @@ for (const dirent of dirents) {
       process.stdout.write('Running '+dirent.name+'... ')
       try {
         const module = await import(scriptDirectory+dirent.name) // this is extremely much faster than child_process.fork
-        await module.default()
         process.stdout.write('Success!')
       } catch (error) {
         process.stderr.write('\n'+error)

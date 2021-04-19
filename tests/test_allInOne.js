@@ -1,22 +1,18 @@
 
+import {assert, nodejs} from './shared.js'
 import {
   dataToArrayBuffer,
   dataToTypedArray,
-  dataToDataView
+  dataToDataView,
+  compareData
 } from '../source/whicheverData.js'
-
-export default function() {
-  for (const key in testDataAs) {
-    verifyTestData(testDataAs[key])
-  }
-}
 
 // The same data in various data holding objects
 const testDataAs = {array: [1,2,3,4]}
 testDataAs.uint8array = new Uint8Array(testDataAs.array)
 testDataAs.arrayBuffer = testDataAs.uint8array.buffer
 testDataAs.uint32array = new Uint32Array(testDataAs.arrayBuffer)
-testDataAs.buffer = Buffer.from(testDataAs.array)
+if (nodejs) testDataAs.buffer = Buffer.from(testDataAs.array)
 testDataAs.dataView = new DataView(testDataAs.arrayBuffer)
 
 function verifyTestData(data) {
@@ -34,12 +30,13 @@ function verifyTestData(data) {
   const dataView = dataToDataView(data)
   assert(dataView.byteLength, 4)
   assert(dataView.getUint32(0), 0x01020304) // returned as big-endian
+  assert(compareData(testDataAs.array, testDataAs.uint8array), true)
+  assert(compareData(testDataAs.uint32array, testDataAs.uint8array), true)
+  if (nodejs) assert(compareData(testDataAs.buffer, testDataAs.arrayBuffer), true)
+  assert(compareData([1234, 4567], [1234, 4567]), true)
+  assert(compareData([1234, 4567], [1234, 4568]), false)
 }
 
-function assert(...arg) {
-  switch (arg.length) {
-    case 1: if (!arg[0]) throw Error('Assertion failed!'); break
-    case 2:
-    case 3: if (arg[0] !== arg[1]) throw Error(arg[0]+' !== '+arg[1]+' '+(arg[2] || 'Assertion failed!')); break
-  }
+for (const key in testDataAs) {
+  verifyTestData(testDataAs[key])
 }

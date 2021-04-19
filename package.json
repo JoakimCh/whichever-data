@@ -5,12 +5,27 @@
   "license": "MIT",
   "type": "module",
   "main": "source/whicheverData.js",
-  "files": ["source/*"],
+  "files": [
+    "source/*"
+  ],
   "repository": "github:JoakimCh/whichever-data",
   "funding": "https://joakimch.github.io/funding.html",
-  "description": "A module with some functions making it easier to accept a wide range of binary-data holding objects like Array, TypedArray, DataView, ArrayBuffer and Node.js's Buffer as input without having to actually know which of them were used as the input.",
-  "keywords": ["binary", "data", "dataTo", "TypedArray", "DataView", "ArrayBuffer", "Buffer", "input"],
+  "description": "An ES module with some functions making it easier to accept a wide range of binary-data holding objects like Array, TypedArray, DataView, ArrayBuffer and Node.js's Buffer as input without having to actually know which of them were used as the input.",
+  "keywords": [
+    "binary",
+    "data",
+    "dataTo",
+    "TypedArray",
+    "DataView",
+    "ArrayBuffer",
+    "Buffer",
+    "input"
+  ],
   "scripts": {
-    "test": "node tests/runAll.js"
+    "test": "node tests/runAll.js",
+    "docs": "jsdoc2md --template readmeTemplate.md source/*.js --param-list-format list> readme.md"
+  },
+  "devDependencies": {
+    "jsdoc-to-markdown": "^7.0.1"
   }
 }
